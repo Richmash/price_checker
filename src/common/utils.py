@@ -1,8 +1,14 @@
 from passlib.hash import pbkdf2_sha512
+import re
 _author__ = 'richmash'
 
 
 class Utils(object):
+
+    @staticmethod
+    def email_is_valid(email):
+        email_address_matcher = re.compile('^[\w-]+@([\w-]+\.)+[\w]+$')
+        return True if email_address_matcher.match(email) else False
 
     @staticmethod
     def hash_password(password):
@@ -15,7 +21,7 @@ class Utils(object):
 
 
     @staticmethod
-    def heck_hashed_password(password, hashed_password):
+    def check_hashed_password(password, hashed_password):
         """
         Checks that the password the user sent matches that of the database.
         The datbase passwords is encrypted more that the user's password at this stage.
