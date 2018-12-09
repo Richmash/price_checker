@@ -1,5 +1,6 @@
-from flask import Blueprint, render_template, request, session, make_response
-
+from flask import Blueprint, render_template, request, session, url_for
+from werkzeug.utils import redirect
+from src.models.users.user import User
 __author__ = 'richmash'
 
 
@@ -9,7 +10,7 @@ user_blueprint = Blueprint('users', __name__)
 def login_user():
     if request.method == 'POST':
         email = request.form['email']
-        password = request.form['password']
+        password = request.form['hashed']
 
         if User.is_login_valid(email, password):
             session['email'] = email
@@ -23,7 +24,7 @@ def register_user():
     pass
 
 @user_blueprint.route('/alerts')
-def user_alert():
+def user_alerts():
     return "This is the alerts page!"
 
 @user_blueprint.route('/logout')

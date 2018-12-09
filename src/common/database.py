@@ -1,5 +1,5 @@
 import pymongo
-from src.common.database import Database
+
 __author__ = 'richmash'
 
 
